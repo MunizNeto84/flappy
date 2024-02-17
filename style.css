@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Pixelify Sans";
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  background-color: #0a1d22;
+  color: #fff;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+}
+
+[flappy] {
+  position: relative;
+  border: 5px solid dodgerblue;
+  height: 43.75rem;
+  width: 75rem;
+  margin: 1rem;
+  background-color: dodgerblue;
+  overflow: hidden;
+}
+
+.bird {
+  position: absolute;
+  width: 3.7rem;
+  left: calc(50% - 30px);
+  bottom: 50%;
+}
+
+.barrier-pair {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.barrier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.barrier .edge {
+  height: 1.8rem;
+  width: 8.1rem;
+  background: linear-gradient(90deg, #55cc37, #a6f392);
+  border: 1px solid #000;
+}
+
+.barrier .body {
+  height: 9.3rem;
+  width: 6.8rem;
+  background: linear-gradient(90deg, #55cc37, #a6f392);
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+.progress {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 4.3rem;
+}
