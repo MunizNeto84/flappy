@@ -11,7 +11,7 @@ function Barrier(reverse = false) {
   this.element.appendChild(reverse ? body : edge);
   this.element.appendChild(reverse ? edge : body);
 
-  this.setHeight = (height) => (body.style.height = `${height}rem`);
+  this.setHeight = (height) => (body.style.height = `${height}px`);
 }
 
 //test
@@ -33,8 +33,8 @@ function barrierPair(height, space, x) {
     this.down.setHeight(heightDown);
   };
 
-  this.getX = () => parseInt(this.element.style.left.split("rem")[0]);
-  this.setX = (x) => (this.element.style.left = `${x}rem`);
+  this.getX = () => parseInt(this.element.style.left.split("px")[0]);
+  this.setX = (x) => (this.element.style.left = `${x}px`);
   this.getW = () => this.element.clientWidth;
 
   this.random();
@@ -42,5 +42,40 @@ function barrierPair(height, space, x) {
 }
 
 //test
-const barrier = new barrierPair(43.7, 12.5, 25);
-document.querySelector("[flappy]").appendChild(barrier.element);
+//const barrier = new barrierPair(43.7, 12.5, 25);
+//document.querySelector("[flappy]").appendChild(barrier.element);
+
+function Barriers(height, width, space, gap, point) {
+  this.pairs = [
+    new barrierPair(height, space, width),
+    new barrierPair(height, space, width + gap),
+    new barrierPair(height, space, width + gap * 2),
+    new barrierPair(height, space, width + gap * 3),
+  ];
+
+  const displacement = 3;
+  this.animation = () => {
+    this.pairs.forEach((pair) => {
+      pair.setX(pair.getX() - displacement);
+
+      if (pair.getX() < -pair.getW()) {
+        pair.setX(pair.getX() + gap * this.pairs.length);
+        pair.random();
+      }
+
+      const split = width / 2;
+      const goal = pair.getX() + displacement >= split && pair.getX() < split;
+      if (goal) {
+        point;
+      }
+    });
+  };
+}
+
+//test
+const barriers = new Barriers(700, 1200, 200, 400);
+const area = document.querySelector("[flappy]");
+barriers.pairs.forEach((pair) => area.appendChild(pair.element));
+setInterval(() => {
+  barriers.animation();
+}, 20);
