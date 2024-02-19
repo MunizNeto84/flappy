@@ -71,4 +71,5 @@ body {
   top: 10px;
   right: 10px;
   font-size: 4.3rem;
+  z-index: 100;
 }
